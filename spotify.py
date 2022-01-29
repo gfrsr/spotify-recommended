@@ -16,7 +16,7 @@ track_list = []
 playlists = sp.current_user_playlists()
 playlist = None
 for i, item in enumerate(playlists['items']):
-    if item['name'] == "Recommended Daily":
+    if item['name'] == os.getenv("PLAYLIST_NAME"):
         playlist = item
 
 if playlist == None:
@@ -31,11 +31,11 @@ if playlist_tracks["items"]:
         old_tracks.append(item["track"]["id"])   
     sp.playlist_remove_all_occurrences_of_items(playlist_id = playlist["id"], items = old_tracks)
 
-artists = sp.current_user_top_artists(time_range="short_term", limit=20)
+artists = sp.current_user_top_artists(time_range="short_term", limit=10)
 for i, item in enumerate(artists['items']):
     artist_list.append(item['id'])
 
-tracks = sp.current_user_top_tracks(time_range="short_term", limit=20)
+tracks = sp.current_user_top_tracks(time_range="short_term", limit=10)
 for i, item in enumerate(tracks['items']):
     track_list.append(item['id'])
 
